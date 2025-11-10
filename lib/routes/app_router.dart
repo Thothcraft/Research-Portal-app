@@ -1,3 +1,8 @@
+/// Application routing configuration
+/// 
+/// This file defines the app's navigation structure using go_router.
+/// Includes route definitions, navigation guards, and authentication redirects.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -15,13 +20,27 @@ import 'package:thothresearch_app/features/data/presentation/data_files_screen.d
 import 'package:thothresearch_app/features/training/presentation/training_screen.dart';
 import 'package:thothresearch_app/features/settings/presentation/settings_screen.dart';
 
-// Main router provider
+/// Main router provider
+/// 
+/// Provides the GoRouter instance with authentication-aware navigation.
+/// Watches [authStateProvider] to handle protected routes.
+/// Main router provider
+/// 
+/// Provides the GoRouter instance with authentication-aware navigation.
+/// Watches [authStateProvider] to handle protected routes.
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
   
   return GoRouter(
     initialLocation: AppConstants.splashRoute,
     debugLogDiagnostics: true,
+    
+    /// Global navigation guard
+    /// 
+    /// Handles authentication-based redirects:
+    /// - Splash screen: Always allowed
+    /// - Unauthenticated users: Redirect to landing page
+    /// - Authenticated users: Redirect away from auth/landing pages
     redirect: (context, state) {
       final isAuthenticated = authState.isAuthenticated;
       final isAuthRoute = state.matchedLocation == AppConstants.authRoute;
@@ -43,49 +62,51 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       return null; // No redirect needed
     },
+    
+    /// Route definitions
     routes: [
-      // Splash screen
+      // Splash screen - Initial loading screen
       GoRoute(
         path: AppConstants.splashRoute,
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
       ),
 
-      // Landing page
+      // Landing page - Pre-authentication welcome screen
       GoRoute(
         path: AppConstants.landingRoute,
         name: 'landing',
         builder: (context, state) => const LandingScreen(),
       ),
 
-      // Auth page
+      // Auth page - Login screen
       GoRoute(
         path: AppConstants.authRoute,
         name: 'auth',
         builder: (context, state) => const LoginScreen(),
       ),
 
-      // Home page with bottom navigation
+      // Home page - Main dashboard (requires authentication)
       GoRoute(
         path: AppConstants.homeRoute,
         name: 'home',
         builder: (context, state) => const HomeScreen(),
       ),
 
-      // Chat page
+      // Chat page - AI assistant (requires authentication)
       GoRoute(
         path: AppConstants.chatRoute,
         name: 'chat',
         builder: (context, state) => const ChatScreen(),
       ),
 
-      // Devices page
+      // Devices page - IoT device list (requires authentication)
       GoRoute(
         path: AppConstants.devicesRoute,
         name: 'devices',
         builder: (context, state) => const DevicesScreen(),
         routes: [
-          // Device detail page
+          // Device detail page - Individual device view
           GoRoute(
             path: ':id',
             name: 'device-detail',
@@ -97,27 +118,29 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
-      // Data files page
+      // Data files page - File management (requires authentication)
       GoRoute(
         path: AppConstants.dataRoute,
         name: 'data',
         builder: (context, state) => const DataFilesScreen(),
       ),
 
-      // Training page
+      // Training page - ML model training (requires authentication)
       GoRoute(
         path: AppConstants.trainingRoute,
         name: 'training',
         builder: (context, state) => const TrainingScreen(),
       ),
 
-      // Settings page
+      // Settings page - User preferences (requires authentication)
       GoRoute(
         path: AppConstants.settingsRoute,
         name: 'settings',
         builder: (context, state) => const SettingsScreen(),
       ),
     ],
+    
+    /// Error page - 404 handler
     errorBuilder: (context, state) => Scaffold(
       body: Center(
         child: Column(
