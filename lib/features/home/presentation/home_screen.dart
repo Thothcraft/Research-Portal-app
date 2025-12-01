@@ -262,12 +262,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               icon: Icons.groups,
               label: 'Community',
               color: Colors.orange,
-              onTap: () {
-                // TODO: Navigate to community
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Community feature coming soon')),
-                );
-              },
+              onTap: () => context.go(AppConstants.communityRoute),
             ),
           ],
         ),

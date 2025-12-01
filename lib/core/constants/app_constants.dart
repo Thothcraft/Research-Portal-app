@@ -65,5 +65,6 @@ class AppConstants {
   static const String dataRoute = '/data';
   static const String trainingRoute = '/training';
   static const String coursesRoute = '/courses';
+  static const String communityRoute = '/community';
   static const String settingsRoute = '/settings';
 }
