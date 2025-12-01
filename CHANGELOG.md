@@ -27,6 +27,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AI chat assistant integration
 - Data file management (view, download, share)
 - ML training job monitoring
+- **Research training courses feature** 🎓
+  - Course listings with detailed information
+  - Instructor profiles and ratings
+  - Enrollment functionality
+  - Topic-based course discovery
+- **Research community forum** 👥
+  - Community post feed
+  - Like and comment on posts
+  - Create new discussion posts
+  - Topic tags for organization
+  - Researcher profiles
+- **Enhanced dashboard** 📊
+  - Statistics overview (Files, Chats, Courses, Community)
+  - Quick action buttons for common tasks
+  - Recent activity feed
+  - Resource links section
+  - Personalized welcome message
 - User settings and preferences
 - Offline support with local caching
 - Light and dark theme support
