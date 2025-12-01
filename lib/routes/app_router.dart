@@ -39,30 +39,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     
     /// Global navigation guard
     /// 
-    /// Handles authentication-based redirects:
-    /// - Splash screen: Always allowed
-    /// - Unauthenticated users: Redirect to landing page
-    /// - Authenticated users: Redirect away from auth/landing pages
+    /// Authentication is currently disabled - all routes are accessible
     redirect: (context, state) {
-      final isAuthenticated = authState.isAuthenticated;
-      final isAuthRoute = state.matchedLocation == AppConstants.authRoute;
-      final isLandingRoute = state.matchedLocation == AppConstants.landingRoute;
-      final isSplashRoute = state.matchedLocation == AppConstants.splashRoute;
-
-      // Allow splash to load
-      if (isSplashRoute) return null;
-
-      // If not authenticated and trying to access protected route
-      if (!isAuthenticated && !isAuthRoute && !isLandingRoute) {
-        return AppConstants.landingRoute;
-      }
-
-      // If authenticated and on auth or landing page, redirect to home
-      if (isAuthenticated && (isAuthRoute || isLandingRoute)) {
-        return AppConstants.homeRoute;
-      }
-
-      return null; // No redirect needed
+      // No authentication checks - allow all routes
+      return null;
     },
     
     /// Route definitions

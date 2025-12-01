@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import 'package:go_router/go_router.dart';
-import 'package:thothresearch_app/features/core/constants/app_constants.dart';
-import 'package:thothresearch_app/features/core/theme/app_colors.dart';
+import 'package:thothresearch_app/core/constants/app_constants.dart';
+import 'package:thothresearch_app/core/theme/app_colors.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -25,8 +25,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     
     if (!mounted) return;
     
-    // Navigate based on authentication status
-    context.go(AppConstants.landingRoute);
+    // Skip authentication and go directly to home
+    context.go(AppConstants.homeRoute);
   }
 
   @override

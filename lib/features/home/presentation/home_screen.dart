@@ -141,39 +141,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
         ),
         const SizedBox(height: 12),
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 1.5,
-          children: [
-            _buildStatCard(
-              icon: Icons.file_present,
-              title: 'Total Files',
-              value: '12',
-              color: Colors.blue,
-            ),
-            _buildStatCard(
-              icon: Icons.chat_bubble,
-              title: 'Active Chats',
-              value: '5',
-              color: Colors.green,
-            ),
-            _buildStatCard(
-              icon: Icons.book,
-              title: 'Courses',
-              value: '3',
-              color: Colors.purple,
-            ),
-            _buildStatCard(
-              icon: Icons.people,
-              title: 'Community',
-              value: '24',
-              color: Colors.orange,
-            ),
-          ],
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _buildStatCard(
+                icon: Icons.file_present,
+                title: 'Total Files',
+                value: '12',
+                color: Colors.blue,
+              ),
+              _buildStatCard(
+                icon: Icons.chat_bubble,
+                title: 'Active Chats',
+                value: '5',
+                color: Colors.green,
+              ),
+              _buildStatCard(
+                icon: Icons.book,
+                title: 'Courses',
+                value: '3',
+                color: Colors.purple,
+              ),
+              _buildStatCard(
+                icon: Icons.people,
+                title: 'Community',
+                value: '24',
+                color: Colors.orange,
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -186,35 +183,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required String value,
     required Color color,
   }) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(icon, color: color, size: 32),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+    return Container(
+      margin: const EdgeInsets.only(right: 12),
+      child: Card(
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: color, size: 16),
+              const SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey[600],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -232,39 +233,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
         ),
         const SizedBox(height: 12),
-        GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 2,
-          children: [
-            _buildQuickAction(
-              icon: Icons.chat,
-              label: 'New Chat',
-              color: Colors.blue,
-              onTap: () => context.go(AppConstants.chatRoute),
-            ),
-            _buildQuickAction(
-              icon: Icons.upload_file,
-              label: 'Upload File',
-              color: Colors.purple,
-              onTap: () => context.go(AppConstants.dataRoute),
-            ),
-            _buildQuickAction(
-              icon: Icons.school,
-              label: 'Courses',
-              color: Colors.green,
-              onTap: () => context.go(AppConstants.coursesRoute),
-            ),
-            _buildQuickAction(
-              icon: Icons.groups,
-              label: 'Community',
-              color: Colors.orange,
-              onTap: () => context.go(AppConstants.communityRoute),
-            ),
-          ],
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _buildQuickAction(
+                icon: Icons.chat,
+                label: 'New Chat',
+                color: Colors.blue,
+                onTap: () => context.go(AppConstants.chatRoute),
+              ),
+              _buildQuickAction(
+                icon: Icons.upload_file,
+                label: 'Upload File',
+                color: Colors.purple,
+                onTap: () => context.go(AppConstants.dataRoute),
+              ),
+              _buildQuickAction(
+                icon: Icons.school,
+                label: 'Courses',
+                color: Colors.green,
+                onTap: () => context.go(AppConstants.coursesRoute),
+              ),
+              _buildQuickAction(
+                icon: Icons.groups,
+                label: 'Community',
+                color: Colors.orange,
+                onTap: () => context.go(AppConstants.communityRoute),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -277,34 +275,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required Color color,
     required VoidCallback onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Card(
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(icon, color: color, size: 24),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
+    return Container(
+      margin: const EdgeInsets.only(right: 12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Card(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, color: color, size: 16),
+                const SizedBox(width: 8),
+                Text(
                   label,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -329,7 +322,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Center(
               child: Column(
                 children: [
-                  Icon(Icons.activity, size: 48, color: Colors.grey[300]),
+                  Icon(Icons.timeline, size: 32, color: Colors.grey[300]),
                   const SizedBox(height: 12),
                   Text(
                     'No recent activity',
