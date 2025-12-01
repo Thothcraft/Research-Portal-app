@@ -64,5 +64,6 @@ class AppConstants {
   static const String deviceDetailRoute = '/devices/:id';
   static const String dataRoute = '/data';
   static const String trainingRoute = '/training';
+  static const String coursesRoute = '/courses';
   static const String settingsRoute = '/settings';
 }

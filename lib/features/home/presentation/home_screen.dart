@@ -256,12 +256,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               icon: Icons.school,
               label: 'Courses',
               color: Colors.green,
-              onTap: () {
-                // TODO: Navigate to courses
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Courses feature coming soon')),
-                );
-              },
+              onTap: () => context.go(AppConstants.coursesRoute),
             ),
             _buildQuickAction(
               icon: Icons.groups,

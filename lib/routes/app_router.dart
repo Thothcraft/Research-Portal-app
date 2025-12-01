@@ -18,6 +18,7 @@ import 'package:thothresearch_app/features/devices/presentation/devices_screen.d
 import 'package:thothresearch_app/features/devices/presentation/device_detail_screen.dart';
 import 'package:thothresearch_app/features/data/presentation/data_files_screen.dart';
 import 'package:thothresearch_app/features/training/presentation/training_screen.dart';
+import 'package:thothresearch_app/features/courses/presentation/courses_screen.dart';
 import 'package:thothresearch_app/features/settings/presentation/settings_screen.dart';
 
 /// Main router provider
@@ -130,6 +131,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppConstants.trainingRoute,
         name: 'training',
         builder: (context, state) => const TrainingScreen(),
+      ),
+
+      // Courses page - Research training courses (requires authentication)
+      GoRoute(
+        path: AppConstants.coursesRoute,
+        name: 'courses',
+        builder: (context, state) => const CoursesScreen(),
       ),
 
       // Settings page - User preferences (requires authentication)
